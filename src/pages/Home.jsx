@@ -7,9 +7,10 @@ export default function Home() {
     const [pokemons, setPokemons] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [api, setApi] = useState("https://pokeapi.co/api/v2/pokemon")
+    const [api, setApi] = useState(() => sessionStorage.getItem("pokeapi_url") || "https://pokeapi.co/api/v2/pokemon")
 
     useEffect(() => {
+        sessionStorage.setItem("pokeapi_url", api)
         setLoading(true)
         const fetchPokemons = async () => {
             try {

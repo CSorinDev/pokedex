@@ -1,6 +1,10 @@
 import { NavLink } from "react-router";
+import PersonIcon from "../assets/PersonIcon";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
+    const { user } = useAuth()
+
     return (
         <header>
             <nav className="flex justify-between items-center p-4">
@@ -15,7 +19,15 @@ export default function Header() {
                         <NavLink to="/pokemons">Pokemons</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login">Login</NavLink>
+                        {
+                            user
+                                ? <NavLink to="/myprofile">
+                                    <PersonIcon />
+                                </NavLink>
+                                : <NavLink to="/login">
+                                    <PersonIcon />
+                                </NavLink>
+                        }
                     </li>
                 </ul>
             </nav>

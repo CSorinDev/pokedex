@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router"
+import { useAuth } from "../context/AuthContext"
 
 export default function Login() {
     const [username, setUsername] = useState("")
@@ -7,6 +8,7 @@ export default function Login() {
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const { login } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,8 +30,7 @@ export default function Login() {
             }
 
             // Guardamos el token en localStorage para mantener la sesión
-            localStorage.setItem("token", data.token)
-            localStorage.setItem("username", data.username)
+            login(data.token, data.username)
 
             // Redirigimos a la página principal (Home) o a la de pokemons
             navigate("/")
@@ -50,7 +51,7 @@ export default function Login() {
                 placeholder="Nombre"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="border py-1 px-2 rounded-lg outline-0 focus:ring-2 transition-all text-black"
+                className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
                 required
             />
             <input
@@ -58,7 +59,7 @@ export default function Login() {
                 placeholder="Contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border py-1 px-2 rounded-lg outline-0 focus:ring-2 transition-all text-black"
+                className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
                 required
             />
             <button

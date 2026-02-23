@@ -37,7 +37,7 @@ export default function Register() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-xl shadow-white/50 rounded-xl">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-lg shadow-white/50 rounded-xl">
             <h1 className="text-center text-xl">¡Únete!</h1>
             <p className="text-center text-sm mb-4">Crea una cuenta nueva</p>
             {error && <p className="text-red-500 text-sm max-w-xs text-center">{error}</p>}
@@ -46,7 +46,7 @@ export default function Register() {
                 placeholder="Nombre"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="border py-1 px-2 rounded-lg outline-0 focus:ring-2 transition-all text-black"
+                className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
                 required
             />
             <input
@@ -54,7 +54,7 @@ export default function Register() {
                 placeholder="Contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border py-1 px-2 rounded-lg outline-0 focus:ring-2 transition-all text-black"
+                className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
                 required
             />
             <button

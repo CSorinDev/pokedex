@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         // Al cargar la app, comprobamos si hay una sesión guardada
@@ -16,6 +17,22 @@ export function AuthProvider({ children }) {
             setToken(savedToken);
         }
     }, []);
+
+    useEffect(() => {
+        if (token) {
+            // Cuando haya token, nos traemos los favoritos de MySQL
+            fetch("http://localhost:3000/api/favorites", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) setFavorites(data)
+                })
+                .catch(err => console.error("Error cargando favoritos:", err));
+        } else {
+            setFavorites([]);
+        }
+    }, [token]);
 
     const login = (newToken, newUser) => {
         // Guardamos en estado
@@ -38,7 +55,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, login, logout }}>
+        <AuthContext.Provider value={{ user, token, favorites, setFavorites, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

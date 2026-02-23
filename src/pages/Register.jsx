@@ -64,7 +64,9 @@ export default function Register() {
             >
                 {loading ? "Registrando..." : "Registrar"}
             </button>
-            <p className="mt-4">¿Ya tienes cuenta? <Link className="underline font-bold" to="/login">Inicia sesión</Link></p>
+            <p className="mt-4">¿Ya tienes cuenta? <Link className="underline font-bold" to="/login">
+                Inicia sesión
+            </Link></p>
         </form>
     )
 }

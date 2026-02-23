@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
     const { user } = useAuth()
+    const navLinkStyle = ({ isActive }) => `py-1 px-2 rounded-lg transition-all hover:bg-black/30 ${isActive ? "bg-black/30" : "bg-transparent"}`
 
     return (
         <header>
@@ -11,12 +12,18 @@ export default function Header() {
                 <NavLink to="/">
                     <img className="max-h-16" src="/pokeapi.png" alt="logo" />
                 </NavLink>
+                
                 <ul className="flex gap-4">
                     <li>
-                        <NavLink to="/">Home</NavLink>
+                        <NavLink className={navLinkStyle} to="/">Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/pokemons">Pokemons</NavLink>
+                        <NavLink
+                            className={navLinkStyle}
+                            to="/pokemons"
+                        >
+                            Pokemons
+                        </NavLink>
                     </li>
                     <li>
                         {

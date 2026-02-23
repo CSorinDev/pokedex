@@ -7,10 +7,9 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import MyProfile from './pages/MyProfile'
 
-function App() {
+function AppRoutes() {
   return (
     <BrowserRouter>
-      {console.log(localStorage.getItem("username"))}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -25,4 +24,4 @@ function App() {
   )
 }
 
-export default App
+export default AppRoutes

@@ -11,7 +11,7 @@ export default function PokemonCard({ pokemon }) {
         >
             <div className="flex justify-between w-full">
                 <p className="capitalize text-xl">{pokemon.name}</p>
-                <InfoIcon onClickFunction={() => navigate("/pokemon/" + pokemon.id)} />
+                <InfoIcon className="cursor-pointer hover:scale-125 transition-all duration-300" onClickFunction={() => navigate("/pokemon/" + pokemon.id)} />
             </div>
             <img
                 src={pokemon.sprites.other.dream_world.front_default}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router"
-import PokemonCard from "../components/PokemonCard"
+import { useParams, useNavigate } from "react-router"
 import Loading from "../components/Loading"
 import { typeColor } from "../styles/TypeStyle"
+import XIcon from "../assets/XIcon"
 
 export default function PokemonInfo() {
+    const navigate = useNavigate()
     const { id } = useParams()
     const [pokemon, setPokemon] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -36,7 +37,8 @@ export default function PokemonInfo() {
     }
 
     return (
-        <article className="flex flex-col items-center gap-4">
+        <article className="flex flex-col items-center gap-4 max-w-fit mx-auto">
+            <XIcon className="cursor-pointer self-end fill-red-500 scale-150 hover:scale-125 transition-all duration-300" onClickFunction={() => navigate("/pokemons")} />
             <h1 className="capitalize text-2xl">
                 {pokemon.id}.
                 &nbsp;

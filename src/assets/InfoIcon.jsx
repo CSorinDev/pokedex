@@ -1,7 +1,7 @@
-export default function InfoIcon({ onClickFunction }) {
+export default function InfoIcon({ className, onClickFunction }) {
     return (
         <svg
-            className="cursor-pointer"
+            className={className}
             onClick={onClickFunction}
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

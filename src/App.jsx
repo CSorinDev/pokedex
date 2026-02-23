@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/pokemons" element={<Home />} />
           <Route path="/pokemon/:id" element={<PokemonInfo />} />
           <Route path="/login" element={<Login />} />
         </Route>

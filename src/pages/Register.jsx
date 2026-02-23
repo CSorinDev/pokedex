@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router"
 
-export default function Login() {
+export default function Register() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
@@ -14,7 +14,7 @@ export default function Login() {
         setError(null)
 
         try {
-            const response = await fetch("http://localhost:3000/api/auth/login", {
+            const response = await fetch("http://localhost:3000/api/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -24,15 +24,11 @@ export default function Login() {
             const data = await response.json()
 
             if (!response.ok) {
-                throw new Error(data.error || "Error al iniciar sesión")
+                throw new Error(data.error || "Error al registrar usuario")
             }
 
-            // Guardamos el token en localStorage para mantener la sesión
-            localStorage.setItem("token", data.token)
-            localStorage.setItem("username", data.username)
-
-            // Redirigimos a la página principal (Home) o a la de pokemons
-            navigate("/")
+            // Registro exitoso, redirigimos al login
+            navigate("/login")
         } catch (err) {
             setError(err.message)
         } finally {
@@ -42,8 +38,8 @@ export default function Login() {
 
     return (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-xl shadow-white/50 rounded-xl">
-            <h1 className="text-center text-xl">¡Bienvenido!</h1>
-            <p className="text-center text-sm mb-4">Inicia sesión para continuar</p>
+            <h1 className="text-center text-xl">¡Únete!</h1>
+            <p className="text-center text-sm mb-4">Crea una cuenta nueva</p>
             {error && <p className="text-red-500 text-sm max-w-xs text-center">{error}</p>}
             <input
                 type="text"
@@ -66,9 +62,9 @@ export default function Login() {
                 className={`py-1 px-2 mt-4 bg-white/80 text-black rounded-lg transition-all shadow-sm shadow-white ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white cursor-pointer'}`}
                 type="submit"
             >
-                {loading ? "Iniciando..." : "Iniciar Sesión"}
+                {loading ? "Registrando..." : "Registrar"}
             </button>
-            <p className="mt-4">¿No tienes cuenta? <Link className="underline font-bold" to="/register">Regístrate</Link></p>
+            <p className="mt-4">¿Ya tienes cuenta? <Link className="underline font-bold" to="/login">Inicia sesión</Link></p>
         </form>
     )
 }

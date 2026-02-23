@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1]; // Extrae el token de "Bearer <token>"
-    
+
     if (!token) return res.status(401).json({ error: 'Acceso denegado. Necesitas iniciar sesión.' });
 
     try {

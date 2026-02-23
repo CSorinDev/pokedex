@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-linear-to-br from-blue-700 to-pink-700 min-h-dvh
+}
+
+#root {
+  @apply min-h-dvh grid grid-rows-[auto_1fr_auto]
+}

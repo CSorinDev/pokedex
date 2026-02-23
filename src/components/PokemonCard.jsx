@@ -16,7 +16,7 @@ export default function PokemonCard({ pokemon }) {
             <img
                 src={pokemon.sprites.other.dream_world.front_default}
                 alt={`${pokemon.name} sprite`}
-                className="group-hover:scale-125 transition-all duration-300 drop-shadow-xl drop-shadow-black max-h-60"
+                className="group-hover:drop-shadow-black transition-all duration-300 drop-shadow-xl drop-shadow-transparent max-h-60"
             />
             <div className="flex justify-around w-full">
                 {

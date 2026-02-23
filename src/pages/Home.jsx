@@ -31,7 +31,7 @@ export default function Home() {
             }
         }
         fetchPokemons()
-    }, [])
+    }, [api])
 
     if (loading) {
         return <Loading />
@@ -41,7 +41,35 @@ export default function Home() {
         return <p>error: {error.message}</p>
     }
 
+    function changePage(ev) {
+        const url = ev.target.value
+
+        if (url) {
+            setApi(url)
+        }
+    }
+
     return (
-        <PokemonsSection pokemons={pokemons} />
+        <>
+            <section className="flex justify-center gap-4 my-8">
+                <button
+                    onClick={changePage}
+                    value={data.previous}
+                    className={`py-2 px-4 rounded-lg bg-blue-500
+                        ${!data.previous ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                >
+                    Anterior
+                </button>
+                <button
+                    onClick={changePage}
+                    value={data.next}
+                    className={`py-2 px-4 rounded-lg bg-blue-500
+                        ${!data.next ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                >
+                    Siguiente
+                </button>
+            </section>
+            <PokemonsSection onClick={(ev) => changePage(ev)} pokemons={pokemons} />
+        </>
     )
 }

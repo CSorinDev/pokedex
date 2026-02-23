@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import PokemonCard from "../components/PokemonCard"
 import Loading from "../components/Loading"
+import { typeColor } from "../styles/TypeStyle"
 
 export default function PokemonInfo() {
     const { id } = useParams()
@@ -41,10 +42,14 @@ export default function PokemonInfo() {
                 &nbsp;
                 {pokemon.name}
             </h1>
-            <img src={pokemon.sprites.other.dream_world.front_default} alt={`${pokemon.name} sprite`} />
+            <img
+                src={pokemon.sprites.other.dream_world.front_default}
+                alt={`${pokemon.name} sprite`}
+                className="max-h-80"
+            />
             <div className="flex gap-4">
                 {pokemon.types.map(type => (
-                    <p className="capitalize" key={type.slot}>{type.type.name}</p>
+                    <p className={`capitalize ${typeColor[type.type.name]} rounded-full px-2 shadow-sm shadow-gray-700`} key={type.slot}>{type.type.name}</p>
                 ))}
             </div>
             <div className="flex gap-4">

@@ -4,7 +4,9 @@ export default function Header() {
     return (
         <header>
             <nav className="flex justify-between items-center p-4">
-                <img className="max-h-16" src="pokeapi.png" alt="logo" />
+                <NavLink to="/">
+                    <img className="max-h-16" src="/pokeapi.png" alt="logo" />
+                </NavLink>
                 <ul className="flex gap-4">
                     <li>
                         <NavLink to="/">Home</NavLink>

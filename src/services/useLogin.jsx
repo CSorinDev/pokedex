@@ -18,8 +18,8 @@ export const useLogin = () => {
 
     try {
       const data = await loginService(username, password)
-      // Guardamos el token en localStorage para mantener la sesión
-      login(data.token, data.username)
+      // El token ya se guarda solo en la cookie por el navegador
+      login(data.username)
       // Redirigimos a la página principal (Home) o a la de pokemons
       navigate('/')
     } catch (err) {

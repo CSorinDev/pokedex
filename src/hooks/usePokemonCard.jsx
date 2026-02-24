@@ -3,13 +3,13 @@ import { useAuth } from '../context/AuthContext'
 
 export function usePokemonCard(pokemon) {
   const navigate = useNavigate()
-  const { token, favorites, setFavorites } = useAuth()
+  const { user, favorites, setFavorites } = useAuth()
 
   // Comprobamos si el pokemon actual ya está en nuestra lista de favoritos guardada en el contexto
   const isFavorite = favorites.some((fav) => fav.name === pokemon.name)
 
   async function addToFavorites() {
-    if (!token) {
+    if (!user) {
       alert('¡Debes iniciar sesión para añadir a favoritos!')
       return
     }
@@ -19,8 +19,8 @@ export function usePokemonCard(pokemon) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
         },
+        credentials: 'include',
         body: JSON.stringify({ pokemon }),
       })
       const data = await response.json()

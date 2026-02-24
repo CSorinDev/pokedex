@@ -1,67 +1,68 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from 'react'
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
-    const [favorites, setFavorites] = useState([]);
+  const [user, setUser] = useState(null)
+  const [favorites, setFavorites] = useState([])
 
-    useEffect(() => {
-        // Al cargar la app, comprobamos si hay una sesión guardada
-        const savedUser = localStorage.getItem("username");
-        const savedToken = localStorage.getItem("token");
+  useEffect(() => {
+    // Al cargar la app, comprobamos si hay una sesión guardada (el nombre de usuario)
+    const savedUser = localStorage.getItem('username')
+    if (savedUser) {
+      setUser(savedUser)
+    }
+  }, [])
 
-        if (savedUser && savedToken) {
-            setUser(savedUser);
-            setToken(savedToken);
-        }
-    }, []);
+  useEffect(() => {
+    if (user) {
+      // Cuando haya usuario, intentamos traer los favoritos
+      // El navegador enviará la cookie automáticamente si existe
+      fetch('http://localhost:3000/api/favorites', {
+        credentials: 'include',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data)) setFavorites(data)
+        })
+        .catch((err) => console.error('Error cargando favoritos:', err))
+    } else {
+      setFavorites([])
+    }
+  }, [user])
 
-    useEffect(() => {
-        if (token) {
-            // Cuando haya token, nos traemos los favoritos de MySQL
-            fetch("http://localhost:3000/api/favorites", {
-                headers: { "Authorization": `Bearer ${token}` }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data)) setFavorites(data)
-                })
-                .catch(err => console.error("Error cargando favoritos:", err));
-        } else {
-            setFavorites([]);
-        }
-    }, [token]);
+  const login = (newUser) => {
+    // Guardamos el nombre en el estado y localStorage
+    setUser(newUser)
+    localStorage.setItem('username', newUser)
+  }
 
-    const login = (newToken, newUser) => {
-        // Guardamos en estado
-        setToken(newToken);
-        setUser(newUser);
+  const logout = async () => {
+    try {
+      // Avisamos al backend para que borre la cookie
+      await fetch('http://localhost:3000/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      })
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error)
+    } finally {
+      // Limpiamos el estado y el localStorage pase lo que pase
+      setUser(null)
+      localStorage.removeItem('username')
+    }
+  }
 
-        // Persistimos en localStorage
-        localStorage.setItem("token", newToken);
-        localStorage.setItem("username", newUser);
-    };
-
-    const logout = () => {
-        // Limpiamos el estado
-        setUser(null);
-        setToken(null);
-
-        // Limpiamos el localStorage
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-    };
-
-    return (
-        <AuthContext.Provider value={{ user, token, favorites, setFavorites, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{ user, favorites, setFavorites, login, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 // Hook personalizado para usar el contexto de forma más limpia
 export const useAuth = () => {
-    return useContext(AuthContext);
-};
+  return useContext(AuthContext)
+}

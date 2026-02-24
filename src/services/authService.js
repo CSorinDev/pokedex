@@ -5,6 +5,7 @@ export const loginService = async (username, password) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({ username, password }),
   })
 

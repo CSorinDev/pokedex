@@ -1,46 +1,10 @@
-import { useNavigate } from 'react-router'
 import { typeColor, typeStyle } from '../../styles/TypeStyle.jsx'
 import InfoIcon from '../../assets/icons/InfoIcon.jsx'
 import HeartIcon from '../../assets/icons/HeartIcon.jsx'
-import { useAuth } from '../../context/AuthContext.jsx'
+import { usePokemonCard } from '../../hooks/usePokemonCard.jsx'
 
 export default function PokemonCard({ pokemon }) {
-  const navigate = useNavigate()
-  const { token, favorites, setFavorites } = useAuth()
-
-  // Comprobamos si el pokemon actual ya está en nuestra lista de favoritos guardada en el contexto
-  const isFavorite = favorites.some((fav) => fav.name === pokemon.name)
-
-  async function addToFavorites(pokemon) {
-    if (!token) {
-      alert('¡Debes iniciar sesión para añadir a favoritos!')
-      return
-    }
-
-    try {
-      const response = await fetch('http://localhost:3000/api/favorites', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ pokemon }),
-      })
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al añadir a favoritos')
-      }
-
-      if (data.action === 'removed') {
-        setFavorites((prev) => prev.filter((p) => p.name !== pokemon.name))
-      } else {
-        setFavorites((prev) => [...prev, data.pokemon])
-      }
-    } catch (err) {
-      alert(err.message)
-    }
-  }
+  const { isFavorite, addToFavorites, goToDetails } = usePokemonCard(pokemon)
 
   return (
     <article
@@ -51,7 +15,7 @@ export default function PokemonCard({ pokemon }) {
         <p className="capitalize text-xl">{pokemon.name}</p>
         <HeartIcon
           className={`hover:scale-125 transition-all cursor-pointer ${isFavorite ? 'text-red-500 hover:text-red-400' : 'hover:text-red-500'}`}
-          onClickFunction={() => addToFavorites(pokemon)}
+          onClickFunction={addToFavorites}
         />
       </div>
       <img
@@ -70,7 +34,7 @@ export default function PokemonCard({ pokemon }) {
         ))}
         <InfoIcon
           className="cursor-pointer hover:scale-125 transition-all duration-300"
-          onClickFunction={() => navigate('/pokemon/' + pokemon.id)}
+          onClickFunction={goToDetails}
         />
       </div>
     </article>

@@ -1,4 +1,4 @@
-export default function FilterByType({setFilterByType}) {
+export default function FilterByType({ setFilterByType }) {
   const types = [
     'normal',
     'fighting',
@@ -27,7 +27,9 @@ export default function FilterByType({setFilterByType}) {
       className="border py-1 px-2 rounded-full text-white"
       onChange={(e) => setFilterByType(e.target.value)}
     >
-      <option className="text-black" value="">All</option>
+      <option className="text-black" value="">
+        All
+      </option>
       {types.map((type) => (
         <option key={type} className="text-black" value={type}>
           {type}

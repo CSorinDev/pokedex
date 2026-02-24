@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { useLogin } from '../services/useLogin'
+import Form from '../components/common/Form'
 
 export default function Login() {
   const {
@@ -13,44 +14,78 @@ export default function Login() {
   } = useLogin()
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-xl shadow-white/50 rounded-xl"
-    >
-      <h1 className="text-center text-xl">¡Bienvenido!</h1>
-      <p className="text-center text-sm mb-4">Inicia sesión para continuar</p>
-      {error && (
-        <p className="text-red-500 text-sm max-w-xs text-center">{error}</p>
-      )}
-      <input
-        type="text"
-        placeholder="Nombre"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
-        required
+    <>
+      <Form
+        handleSubmit={handleSubmit}
+        title="¡Bienvenido!"
+        description="Inicia sesión para continuar"
+        inputs={[
+          {
+            type: 'text',
+            name: "username",
+            placeholder: 'Nombre',
+            value: username,
+            onChange: (e) => setUsername(e.target.value),
+            required: true,
+          },
+          {
+            type: 'password',
+            name: "password",
+            placeholder: 'Contraseña',
+            value: password,
+            onChange: (e) => setPassword(e.target.value),
+            required: true,
+          },
+        ]}
+        subtitle="¿No tienes cuenta? "
+        subtitleLink="/register"
+        subtitleText="Regístrate" 
+        error={error}
+        loading={loading}
       />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
-        required
-      />
-      <button
-        disabled={loading}
-        className={`py-1 px-2 mt-4 bg-white/80 text-black rounded-lg transition-all shadow-sm shadow-white ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white cursor-pointer'}`}
-        type="submit"
+
+
+        {/* BORRAR ESTO */}
+
+      {/* <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-xl shadow-white/50 rounded-xl"
       >
-        {loading ? 'Iniciando...' : 'Iniciar Sesión'}
-      </button>
-      <p className="mt-4">
-        ¿No tienes cuenta?{' '}
-        <Link className="underline font-bold" to="/register">
-          Regístrate
-        </Link>
-      </p>
-    </form>
+        <h1 className="text-center text-xl">¡Bienvenido!</h1>
+        <p className="text-center text-sm mb-4">Inicia sesión para continuar</p>
+        {error && (
+          <p className="text-red-500 text-sm max-w-xs text-center">{error}</p>
+        )}
+        <input
+          type="text"
+          placeholder="Nombre"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="border py-1 px-2 rounded-lg outline-0 ring-white focus:ring-2 transition-all"
+          required
+        />
+        <button
+          disabled={loading}
+          className={`py-1 px-2 mt-4 bg-white/80 text-black rounded-lg transition-all shadow-sm shadow-white ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white cursor-pointer'}`}
+          type="submit"
+        >
+          {loading ? 'Iniciando...' : 'Iniciar Sesión'}
+        </button>
+        <p className="mt-4">
+          ¿No tienes cuenta?{' '}
+          <Link className="underline font-bold" to="/register">
+            Regístrate
+          </Link>
+        </p>
+      </form> */}
+    </>
   )
 }

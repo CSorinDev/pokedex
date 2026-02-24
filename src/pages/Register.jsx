@@ -1,40 +1,17 @@
 import { useState } from "react"
 import { useNavigate, Link } from "react-router"
+import useRegister from "../hooks/useRegister"
 
 export default function Register() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        setError(null)
-
-        try {
-            const response = await fetch("http://localhost:3000/api/auth/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password })
-            })
-            const data = await response.json()
-
-            if (!response.ok) {
-                throw new Error(data.error || "Error al registrar usuario")
-            }
-
-            // Registro exitoso, redirigimos al login
-            navigate("/login")
-        } catch (err) {
-            setError(err.message)
-        } finally {
-            setLoading(false)
-        }
-    }
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        error,
+        loading,
+        handleSubmit,
+    } = useRegister()
 
     return (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 border px-20 py-12 max-w-fit mx-auto place-items-center shadow-lg shadow-white/50 rounded-xl">

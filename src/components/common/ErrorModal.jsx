@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import XIcon from '../assets/icons/XIcon'
+import XIcon from '../../assets/icons/XIcon'
 import Button from './Button'
 
 export default function ErrorModal({ message = 'Error' }) {

@@ -1,9 +1,9 @@
 import { usePokemons } from '../hooks/usePokemons'
 import { useScroll } from '../hooks/useScroll'
-import Loading from '../components/Loading'
-import ErrorModal from '../components/ErrorModal'
-import PokemonCard from '../components/PokemonCard'
-import FiltersBar from '../components/FiltersBar'
+import Loading from '../components/common/Loading'
+import ErrorModal from '../components/common/ErrorModal'
+import PokemonCard from '../components/pokemon/PokemonCard'
+import FiltersBar from '../components/filters/FiltersBar'
 
 export default function Pokemonsv2() {
   const { pokemons, loading, error, setFilterByName } = usePokemons()

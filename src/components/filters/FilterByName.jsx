@@ -1,4 +1,4 @@
-import SearchIcon from '../assets/icons/SearchIcon'
+import SearchIcon from '../../assets/icons/SearchIcon'
 
 export default function FilterByName({ setFilterByName }) {
   const handleChange = (e) => {

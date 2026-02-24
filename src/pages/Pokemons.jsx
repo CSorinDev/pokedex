@@ -6,7 +6,7 @@ import PokemonCard from '../components/pokemon/PokemonCard'
 import FiltersBar from '../components/filters/FiltersBar'
 
 export default function Pokemons() {
-  const { pokemons, loading, error, setFilterByName } = usePokemons()
+  const { pokemons, loading, error, setFilterByName, setFilterByType } = usePokemons()
   const { limit } = useScroll(10, 10)
 
   if (loading) return <Loading message="Cargando pokemons..." />
@@ -14,7 +14,7 @@ export default function Pokemons() {
 
   return (
     <>
-      <FiltersBar setFilterByName={setFilterByName} />
+      <FiltersBar setFilterByName={setFilterByName} setFilterByType={setFilterByType} />
       <section className="flex gap-8 flex-wrap p-4 justify-center">
         {pokemons &&
           pokemons.slice(0, limit).map((pokemon) => {

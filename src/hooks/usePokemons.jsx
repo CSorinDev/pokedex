@@ -8,6 +8,7 @@ export const usePokemons = () => {
   const [loading, setLoading] = useState(!cachedPokemons)
   const [error, setError] = useState(null)
   const [filterByName, setFilterByName] = useState('')
+  const [filterByType, setFilterByType] = useState('')
 
   useEffect(() => {
     if (cachedPokemons) return
@@ -35,9 +36,21 @@ export const usePokemons = () => {
     getPokemons()
   }, [])
 
-  const filteredPokemons = pokemons.filter((pokemon) =>
+  let filteredPokemons = pokemons.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(filterByName.toLowerCase())
   )
 
-  return { pokemons: filteredPokemons, loading, error, setFilterByName }
+  if (filterByType) {
+    filteredPokemons = filteredPokemons.filter((pokemon) =>
+      pokemon.types.some((type) => type.type.name === filterByType)
+    )
+  }
+
+  return {
+    pokemons: filteredPokemons,
+    loading,
+    error,
+    setFilterByName,
+    setFilterByType,
+  }
 }

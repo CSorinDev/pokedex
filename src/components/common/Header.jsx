@@ -26,7 +26,7 @@ export default function Header() {
             </NavLink>
           </li> */}
           <li>
-            <NavLink className={navLinkStyle} to="/pokemonsv2">
+            <NavLink className={navLinkStyle} to="/pokemons">
               Pokemons
             </NavLink>
           </li>

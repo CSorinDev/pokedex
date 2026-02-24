@@ -4,7 +4,7 @@ import Login from './pages/Login'
 import Layout from './layouts/Layout'
 import PokemonInfo from './pages/PokemonInfo'
 import Home from './pages/Home'
-import Register from './pages/Register'
+import RegisterPage from './pages/RegisterPage'
 import MyProfile from './pages/MyProfile'
 import Pokemonsv2 from './pages/Pokemonsv2'
 
@@ -18,11 +18,11 @@ function AppRoutes() {
           <Route path="/pokemonsv2" element={<Pokemonsv2 />} />
           <Route path="/pokemon/:id" element={<PokemonInfo />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/myprofile" element={<MyProfile />} />
         </Route>
       </Routes>
-    </BrowserRouter >
+    </BrowserRouter>
   )
 }
 

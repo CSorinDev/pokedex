@@ -1,9 +1,10 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 export default function useRegister() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -12,6 +13,13 @@ export default function useRegister() {
     e.preventDefault()
     setLoading(true)
     setError(null)
+
+    if (password !== confirmPassword) {
+        console.log(password + " / " + confirmPassword)
+      setError('Las contraseñas no coinciden')
+      setLoading(false)
+      return
+    }
 
     try {
       const response = await fetch('http://localhost:3000/api/auth/register', {
@@ -41,6 +49,8 @@ export default function useRegister() {
     setUsername,
     password,
     setPassword,
+    confirmPassword,
+    setConfirmPassword, 
     error,
     loading,
     handleSubmit,

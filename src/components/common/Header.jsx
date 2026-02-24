@@ -20,12 +20,14 @@ export default function Header() {
               Home
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink className={navLinkStyle} to="/pokemons">
               Pokemons
             </NavLink>
+          </li> */}
+          <li>
             <NavLink className={navLinkStyle} to="/pokemonsv2">
-              Pokemonsv2
+              Pokemons
             </NavLink>
           </li>
           <li>

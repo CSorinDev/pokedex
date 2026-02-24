@@ -39,9 +39,5 @@ export function usePokemonCard(pokemon) {
     }
   }
 
-  const goToDetails = () => {
-    navigate('/pokemon/' + pokemon.id)
-  }
-
-  return { isFavorite, addToFavorites, goToDetails }
+  return { isFavorite, addToFavorites }
 }

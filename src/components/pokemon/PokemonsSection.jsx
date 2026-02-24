@@ -1,6 +1,6 @@
 import PokemonCard from "./PokemonCard"
 
-export default function PokemonsSection({ pokemons, onClick }) {
+export default function PokemonsSection({ pokemons }) {
     if (pokemons.length === 0) {
         return <p>No se han encontrado pokémons</p>
     }

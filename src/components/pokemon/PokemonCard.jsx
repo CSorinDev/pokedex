@@ -2,9 +2,11 @@ import { typeColor, typeStyle } from '../../styles/TypeStyle.jsx'
 import InfoIcon from '../../assets/icons/InfoIcon.jsx'
 import HeartIcon from '../../assets/icons/HeartIcon.jsx'
 import { usePokemonCard } from '../../hooks/usePokemonCard.jsx'
+import { useNavigate } from 'react-router'
 
 export default function PokemonCard({ pokemon }) {
-  const { isFavorite, addToFavorites, goToDetails } = usePokemonCard(pokemon)
+  const { isFavorite, addToFavorites } = usePokemonCard(pokemon)
+  const navigate = useNavigate()
 
   return (
     <article
@@ -34,7 +36,7 @@ export default function PokemonCard({ pokemon }) {
         ))}
         <InfoIcon
           className="cursor-pointer hover:scale-125 transition-all duration-300"
-          onClickFunction={goToDetails}
+          onClickFunction={() => navigate('/pokemon/' + pokemon.id)}
         />
       </div>
     </article>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router"
-import Loading from "../components/Loading"
 import { typeColor } from "../styles/TypeStyle"
-import XIcon from "../assets/XIcon"
+import Loading from "../components/Loading"
+import XIcon from "../assets/icons/XIcon"
 
 export default function PokemonInfo() {
     const navigate = useNavigate()

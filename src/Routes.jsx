@@ -6,6 +6,7 @@ import PokemonInfo from './pages/PokemonInfo'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import MyProfile from './pages/MyProfile'
+import Pokemonsv2 from './pages/Pokemonsv2'
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/pokemons" element={<Pokemons />} />
+          <Route path="/pokemonsv2" element={<Pokemonsv2 />} />
           <Route path="/pokemon/:id" element={<PokemonInfo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

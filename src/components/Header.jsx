@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import PersonIcon from "../assets/PersonIcon";
+import PersonIcon from "../assets/icons/PersonIcon";
 import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
@@ -23,6 +23,12 @@ export default function Header() {
                             to="/pokemons"
                         >
                             Pokemons
+                        </NavLink>
+                        <NavLink
+                            className={navLinkStyle}
+                            to="/pokemonsv2"
+                        >
+                            Pokemonsv2
                         </NavLink>
                     </li>
                     <li>

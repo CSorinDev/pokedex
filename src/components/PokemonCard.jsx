@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import InfoIcon from "../assets/InfoIcon.jsx"
 import { typeColor, typeStyle } from "../styles/TypeStyle.jsx";
-import HeartIcon from "../assets/HeartIcon.jsx";
+import InfoIcon from "../assets/icons/InfoIcon.jsx"
+import HeartIcon from "../assets/icons/HeartIcon.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function PokemonCard({ pokemon }) {
